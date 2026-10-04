@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Practical and private advertising">
+  <rect width="120" height="120" fill="#e3e3e3"/>
+  <g fill="#f4f4f4" stroke="#1c1a17" stroke-width="3.5" stroke-linejoin="round">
+    <path d="M30 52 62 38v44L30 68Z"/>
+    <rect x="34" y="66" width="13" height="19" rx="3"/>
+    <rect x="62" y="66" width="27" height="22" rx="4"/>
+  </g>
+  <path d="M69 66v-5a7 7 0 0 1 14 0v5" fill="none" stroke="#1c1a17" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="76" cy="77" r="3" fill="#c8102e"/>
+  <g fill="none" stroke="#1c1a17" stroke-width="3.5" stroke-linecap="round">
+    <path d="M74 46q9 14 0 28"/>
+    <path d="M84 40q13 20 0 40"/>
+  </g>
+</svg>

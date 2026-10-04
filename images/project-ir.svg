@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Query-by-example scientific article retrieval">
+  <rect width="120" height="120" fill="#e3e3e3"/>
+  <rect x="11" y="43" width="36" height="28" rx="6" fill="#f4f4f4" stroke="#1c1a17" stroke-width="3.5"/>
+  <g fill="none" stroke="#1c1a17" stroke-width="3" stroke-linecap="round">
+    <circle cx="26" cy="54" r="7"/>
+    <path d="M31 59l6 6"/>
+  </g>
+  <path d="M50 57h10" fill="none" stroke="#1c1a17" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M56 52l6 5-6 5" fill="none" stroke="#1c1a17" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#f4f4f4" stroke="#1c1a17" stroke-width="3.5" stroke-linejoin="round">
+    <rect x="69" y="27" width="41" height="17" rx="3"/>
+    <rect x="69" y="51" width="41" height="17" rx="3"/>
+    <rect x="69" y="75" width="41" height="17" rx="3"/>
+  </g>
+  <g stroke="#adadad" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M76 35h27M76 41h18"/>
+    <path d="M76 77h27M76 83h18"/>
+  </g>
+  <g stroke="#c8102e" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M76 59h27M76 65h18"/>
+  </g>
+</svg>

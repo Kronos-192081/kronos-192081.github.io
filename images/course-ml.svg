@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Machine Learning">
+  <rect width="120" height="120" fill="#e3e3e3"/>
+  <g stroke="#adadad" stroke-width="2" fill="none">
+    <path d="M30 34 60 46M30 34 60 74M30 60 60 46M30 60 60 74M30 86 60 46M30 86 60 74"/>
+    <path d="M60 46 90 34M60 46 90 60M60 46 90 86M60 74 90 34M60 74 90 60M60 74 90 86"/>
+  </g>
+  <g fill="#1c1a17">
+    <circle cx="30" cy="34" r="6"/><circle cx="30" cy="60" r="6"/><circle cx="30" cy="86" r="6"/>
+    <circle cx="90" cy="34" r="6"/><circle cx="90" cy="60" r="6"/><circle cx="90" cy="86" r="6"/>
+  </g>
+  <g fill="#f4f4f4" stroke="#1c1a17" stroke-width="3.5">
+    <circle cx="60" cy="46" r="7"/><circle cx="60" cy="74" r="7"/>
+  </g>
+  <circle cx="90" cy="60" r="4" fill="#c8102e"/>
+</svg>

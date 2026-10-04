@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shiladitya De</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Shiladitya De">
+  <meta name="description" content="Shiladitya De — Member Technical at D. E. Shaw India. Research in usable security and privacy.">
+  <link rel="icon" href="images/favicon.svg">
+
+  <!--
+    Resolve the colour theme before first paint so the page never flashes
+    light before switching to dark. Kept inline and dependency-free.
+  -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = stored || (prefersDark ? "dark" : "light");
+        if (theme === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (err) {
+        /* localStorage blocked (private mode, file://) — fall back to light. */
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <style>
+    /* =========================================================
+       Site-wide design variables.
+       Change colors, margins, font, and text weight here.
+       ========================================================= */
+    :root {
+      --page-width: 1400px;
+      --sidebar-width: clamp(236px, 23vw, 296px);
+      --layout-gap: clamp(26px, 3.4vw, 46px);
+      --page-gutter: clamp(16px, 3.2vw, 34px);
+      /* Default theme: cobalt sky. Change the theme by editing the <body> class below.
+         Available choices:
+         theme-cobalt-sky, theme-soft-green, theme-muted-sage, theme-blue-gray,
+         theme-warm-cream, theme-minimal-gray, theme-slate-teal, theme-lavender,
+         theme-sandstone, theme-forest, theme-michigan-blue.
+      */
+      --link-blue: #1a5fb4;
+      --accent-orange: #b3541e;
+      --on-accent: #ffffff;
+      --soft-border: #d8e4f2;
+      --muted-text: #55657a;
+      --body-text: #1b1f24;
+      --page-bg: #ffffff;
+
+      --nav-bg: rgba(219, 234, 254, 0.80);
+      --nav-bg-strong: rgba(222, 236, 254, 0.93);
+      --nav-hover: #bfdbfe;
+      --nav-text: #1e4e8c;
+      --nav-text-hover: #123566;
+      --side-border: #a8c8e8;
+      --card-hover: #f5f9ff;
+      --image-bg: #f5f9ff;
+      --placeholder-bg: #eaf2fd;
+      --placeholder-border: #c3dcf5;
+      --social-bg: #f2f7fd;
+      --social-hover-bg: #e2eefc;
+      --normal-text-weight: 450;
+
+      /*
+        Background options. Controlled by adding/removing a class on <body>:
+        - bg-none
+        - bg-doodle-portrait
+        - bg-doodle-landscape
+      */
+      --site-bg-image: none;
+      --site-bg-overlay: rgba(255, 255, 255, 0);
+      --site-bg-repeat: no-repeat;
+      --site-bg-position: center top;
+      --site-bg-size: cover;
+      --site-bg-attachment: scroll;
+      /* Font options. Change --site-font-family to any one of these:
+         1. 'Lato', Verdana, Helvetica, sans-serif;
+         2. 'Source Sans 3', Verdana, Helvetica, sans-serif;
+         3. 'Inter', Verdana, Helvetica, sans-serif;
+         4. 'IBM Plex Sans', Verdana, Helvetica, sans-serif;
+         5. 'Alegreya Sans', Verdana, Helvetica, sans-serif;
+      */
+      --site-font-family: 'Alegreya Sans', Verdana, Helvetica, sans-serif;
+    }
+
+    /* =========================================================
+       Theme presets.
+       To choose a theme, edit the <body> class near the bottom of <head>.
+       Example: <body class="theme-cobalt-sky bg-none">
+       ========================================================= */
+
+    body.theme-cobalt-sky {
+      --link-blue: #1a5fb4;
+      --accent-orange: #b3541e;
+      --soft-border: #d8e4f2;
+      --muted-text: #55657a;
+      --nav-bg: rgba(219, 234, 254, 0.80);
+      --nav-bg-strong: rgba(222, 236, 254, 0.93);
+      --nav-hover: #bfdbfe;
+      --nav-text: #1e4e8c;
+      --nav-text-hover: #123566;
+      --side-border: #a8c8e8;
+      --card-hover: #f5f9ff;
+      --image-bg: #f5f9ff;
+      --placeholder-bg: #eaf2fd;
+      --placeholder-border: #c3dcf5;
+      --social-bg: #f2f7fd;
+      --social-hover-bg: #e2eefc;
+    }
+
+    body.theme-soft-green {
+      --link-blue: #2f855a;
+      --accent-orange: #c8742f;
+      --soft-border: #dfe8df;
+      --muted-text: #5e6f5e;
+      --nav-bg: rgba(237, 254, 223, 0.78);
+      --nav-bg-strong: rgba(237, 254, 223, 0.92);
+      --nav-hover: #c1e1c1;
+      --nav-text: #3a6b3a;
+      --nav-text-hover: #234923;
+      --side-border: #b8d9b8;
+      --card-hover: #f8fcf6;
+      --image-bg: #f8fcf6;
+      --placeholder-bg: #f1faee;
+      --placeholder-border: #cfe6cf;
+      --social-bg: #f5f8f3;
+      --social-hover-bg: #e5f3e2;
+    }
+
+    body.theme-muted-sage {
+      --link-blue: #276749;
+      --accent-orange: #c46a28;
+      --nav-bg: rgba(232, 242, 232, 0.88);
+      --nav-bg-strong: rgba(232, 242, 232, 0.96);
+      --nav-hover: #d2e4d2;
+      --nav-text: #355f44;
+      --nav-text-hover: #244431;
+      --side-border: #bdd8c0;
+      --card-hover: #f7faf7;
+      --social-hover-bg: #e7f3e7;
+    }
+
+    body.theme-blue-gray {
+      --link-blue: #1f5f8b;
+      --accent-orange: #b35c1e;
+      --nav-bg: rgba(235, 243, 250, 0.86);
+      --nav-bg-strong: rgba(235, 243, 250, 0.96);
+      --nav-hover: #d7e8f7;
+      --nav-text: #244966;
+      --nav-text-hover: #16344d;
+      --side-border: #b9d5ea;
+      --card-hover: #f7fbff;
+      --social-hover-bg: #e8f3fb;
+    }
+
+    body.theme-warm-cream {
+      --link-blue: #2364a3;
+      --accent-orange: #c26924;
+      --nav-bg: rgba(255, 246, 226, 0.88);
+      --nav-bg-strong: rgba(255, 246, 226, 0.96);
+      --nav-hover: #f3dfb8;
+      --nav-text: #6a4a1f;
+      --nav-text-hover: #3f2b10;
+      --side-border: #ead3a6;
+      --card-hover: #fffaf0;
+      --social-hover-bg: #fff0d8;
+    }
+
+    body.theme-minimal-gray {
+      --link-blue: #205ea8;
+      --accent-orange: #a85f2a;
+      --nav-bg: rgba(245, 245, 245, 0.92);
+      --nav-bg-strong: rgba(248, 248, 248, 0.98);
+      --nav-hover: #e7e7e7;
+      --nav-text: #333333;
+      --nav-text-hover: #111111;
+      --side-border: #d6d6d6;
+      --card-hover: #f8f8f8;
+      --social-hover-bg: #eeeeee;
+    }
+
+    body.theme-slate-teal {
+      --link-blue: #1c6e73;
+      --accent-orange: #b96a3a;
+      --nav-bg: rgba(229, 241, 240, 0.90);
+      --nav-bg-strong: rgba(229, 241, 240, 0.97);
+      --nav-hover: #cde4e2;
+      --nav-text: #285b5f;
+      --nav-text-hover: #183f42;
+      --side-border: #aacdca;
+      --card-hover: #f5fbfa;
+      --social-hover-bg: #def0ef;
+    }
+
+    body.theme-lavender {
+      --link-blue: #4a63a8;
+      --accent-orange: #b5652f;
+      --nav-bg: rgba(242, 238, 250, 0.90);
+      --nav-bg-strong: rgba(242, 238, 250, 0.97);
+      --nav-hover: #ded5f2;
+      --nav-text: #4f4778;
+      --nav-text-hover: #312a55;
+      --side-border: #cfc3eb;
+      --card-hover: #faf8ff;
+      --social-hover-bg: #eee8fb;
+    }
+
+    body.theme-sandstone {
+      --link-blue: #2f6f95;
+      --accent-orange: #b9702f;
+      --nav-bg: rgba(246, 238, 225, 0.90);
+      --nav-bg-strong: rgba(246, 238, 225, 0.97);
+      --nav-hover: #e7d6be;
+      --nav-text: #5f4b32;
+      --nav-text-hover: #3c2e1d;
+      --side-border: #d7c0a2;
+      --card-hover: #fcf8f2;
+      --social-hover-bg: #f2e5d4;
+    }
+
+    body.theme-forest {
+      --link-blue: #216e4e;
+      --accent-orange: #c77a2d;
+      --nav-bg: rgba(225, 238, 228, 0.91);
+      --nav-bg-strong: rgba(225, 238, 228, 0.98);
+      --nav-hover: #c4dccb;
+      --nav-text: #244f35;
+      --nav-text-hover: #153520;
+      --side-border: #a9ccb3;
+      --card-hover: #f5faf6;
+      --social-hover-bg: #e2f0e6;
+    }
+
+    body.theme-michigan-blue {
+      --link-blue: #00274c;
+      --accent-orange: #b46a00;
+      --nav-bg: rgba(231, 238, 247, 0.92);
+      --nav-bg-strong: rgba(231, 238, 247, 0.98);
+      --nav-hover: #c9d8ea;
+      --nav-text: #00274c;
+      --nav-text-hover: #001a33;
+      --side-border: #b7c9df;
+      --card-hover: #f6f9fd;
+      --social-hover-bg: #e0ebf7;
+    }
+
+    /* Background presets. */
+    body.bg-none {
+      --site-bg-image: none;
+      --site-bg-overlay: rgba(255, 255, 255, 0);
+      --site-bg-repeat: no-repeat;
+      --site-bg-position: center top;
+      --site-bg-size: cover;
+      --site-bg-attachment: scroll;
+    }
+
+    /* =========================================================
+       DARK MODE
+       Layered on top of whichever theme preset is active, so it
+       works with every theme. Toggled by data-theme="dark" on <html>,
+       which the button and the pre-paint script in <head> set.
+       ========================================================= */
+
+    /* Must out-specify the `body.theme-*` presets above, which are (0,1,1).
+       `html[data-theme="dark"] body` is (0,1,2), so the dark values win. */
+    html[data-theme="dark"] {
+      color-scheme: dark;
+    }
+
+    html[data-theme="dark"] body {
+      --link-blue: #7fb2f0;
+      --accent-orange: #f0993f;
+      --on-accent: #0d1117;
+      --soft-border: #2b3a4d;
+      --muted-text: #9aabc0;
+      --body-text: #e3e9f1;
+      --page-bg: #0f151d;
+      --nav-bg: rgba(28, 40, 56, 0.82);
+      --nav-bg-strong: rgba(28, 40, 56, 0.95);
+      --nav-hover: #24344a;
+      --nav-text: #a6c6ee;
+      --nav-text-hover: #d3e6fc;
+      --side-border: #33465e;
+      --card-hover: #17212e;
+      --image-bg: #17212e;
+      --placeholder-bg: #1b2735;
+      --placeholder-border: #2f4258;
+      --social-bg: #1a2432;
+      --social-hover-bg: #24344a;
+      --site-bg-overlay: rgba(15, 21, 29, 0);
+    }
+
+    body.bg-doodle-portrait {
+      --site-bg-image: url("images/Rough-22-portrait.jpg");
+      --site-bg-overlay: rgba(255, 255, 255, 0.77);
+      --site-bg-repeat: repeat-y;
+      --site-bg-position: center top;
+      --site-bg-size: 100% auto;
+      --site-bg-attachment: scroll;
+    }
+
+    body.bg-doodle-landscape {
+      --site-bg-image: url("images/Rough-22.jpg");
+      --site-bg-overlay: rgba(255, 255, 255, 0.78);
+      --site-bg-repeat: no-repeat;
+      --site-bg-position: center top;
+      --site-bg-size: cover;
+      --site-bg-attachment: fixed;
+    }
+
+    /* Base typography and page behavior. */
+    html {
+      scroll-behavior: smooth;
+      font-size: clamp(14.5px, 0.3vw + 14.1px, 16px);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--site-font-family);
+      background-color: var(--page-bg);
+      background-image:
+        linear-gradient(var(--site-bg-overlay), var(--site-bg-overlay)),
+        var(--site-bg-image);
+      background-repeat: var(--site-bg-repeat);
+      background-position: var(--site-bg-position);
+      background-size: var(--site-bg-size);
+      background-attachment: var(--site-bg-attachment);
+      color: var(--body-text);
+      line-height: 1.5em;
+      word-spacing: 0.09em;
+      letter-spacing: 0.025em;
+      font-weight: var(--normal-text-weight);
+      overflow-wrap: break-word;
+    }
+
+    body,
+    p,
+    a {
+      font-family: var(--site-font-family);
+      font-size: 1rem;
+      font-weight: var(--normal-text-weight);
+    }
+
+    /* Headings are intentionally heavier than normal text. */
+    h1,
+    h2,
+    h3 {
+      line-height: 1.25;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin: 0 0 16px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--soft-border);
+      letter-spacing: 0.01em;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 0 0 12px 0;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin: 0 0 4px 0;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    a {
+      color: var(--link-blue);
+      text-decoration: none;
+    }
+
+    a:focus,
+    a:hover {
+      color: var(--accent-orange);
+      text-decoration: none;
+    }
+
+    /* =========================================================
+       TWO-COLUMN LAYOUT
+       Left  : identity block + vertical nav (sticky)
+       Right : all content sections
+       ========================================================= */
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+      gap: var(--layout-gap);
+      align-items: start;
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 34px var(--page-gutter) 60px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 26px;
+      align-self: start;
+      min-width: 0;
+    }
+
+    main {
+      min-width: 0;
+      padding: 0;
+    }
+
+    /* =========================================================
+       IDENTITY BLOCK
+       ========================================================= */
+
+    .profile {
+      text-align: center;
+      padding-bottom: 18px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--soft-border);
+    }
+
+    .profile-photo {
+      width: 132px;
+      max-width: 55vw;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+
+    .name-block {
+      line-height: 1.65;
+      margin: 14px 0 0;
+    }
+
+    .name-heading {
+      font-size: 1.7em;
+      font-weight: bold;
+    }
+
+    .name-bengali {
+      font-size: 1.55em;
+    }
+
+    .role-line {
+      color: var(--muted-text);
+      font-size: 0.95rem;
+    }
+
+    .social-links {
+      margin: 12px 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .social-links a.fa,
+    .social-links a.ai {
+      background-color: var(--social-bg);
+      border-radius: 20px;
+      padding: 6px 10px;
+      margin: 4px;
+      display: inline-block;
+      color: var(--muted-text);
+      font-size: 22px;
+      line-height: 1;
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .social-links a.fa:hover,
+    .social-links a.ai:hover {
+      color: var(--link-blue);
+      transform: scale(1.1);
+      background-color: var(--social-hover-bg);
+    }
+
+    /* =========================================================
+       VERTICAL NAV  (below the identity block)
+       ========================================================= */
+
+    .side-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .side-nav a {
+      display: block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--nav-text);
+      font-size: 1.02rem;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .side-nav a:hover {
+      background-color: var(--nav-hover);
+      color: var(--nav-text-hover);
+    }
+
+    .side-nav a.active {
+      background-color: var(--link-blue);
+      color: var(--on-accent);
+      font-weight: 700;
+    }
+
+    .side-nav a.active:hover {
+      background-color: var(--nav-text-hover);
+      color: var(--on-accent);
+    }
+
+    /* =========================================================
+       SECTIONS
+       ========================================================= */
+
+    section {
+      margin: 52px 0;
+      scroll-margin-top: 26px;
+    }
+
+    section:first-child {
+      margin-top: 0;
+    }
+
+    .container {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Unheaded lead paragraph at the top of the content column. */
+    .lead-intro {
+      text-align: left;
+      font-size: 1.04rem;
+      line-height: 1.62em;
+      margin-bottom: 8px;
+    }
+
+    /* Publication/project cards. Images are vertically centered with text. */
+    .publication {
+      display: flex;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--soft-border);
+      align-items: center;
+      transition: background-color 0.18s ease;
+    }
+
+    .publication:hover {
+      background-color: var(--card-hover);
+    }
+
+    .publication img {
+      width: 135px;
+      max-height: 120px;
+      object-fit: contain;
+      flex-shrink: 0;
+      cursor: pointer;
+      border-radius: 4px;
+      background: var(--image-bg);
+      box-sizing: border-box;
+    }
+
+    /* Square logo tiles (course categories, projects). */
+    .publication img.tile-logo {
+      width: 108px;
+      height: 108px;
+      max-width: none;
+      max-height: none;
+      cursor: default;
+      border: 1px solid var(--soft-border);
+      border-radius: 6px;
+    }
+
+    /* Wide venue logos (publications). Keep the natural aspect ratio and let
+       the box hug the artwork, so no empty background shows beside the logo. */
+    .publication img.venue-logo {
+      width: 180px;
+      height: auto;
+      max-height: 96px;
+      max-width: 180px;
+      object-fit: contain;
+      object-position: left center;
+      align-self: center;
+      cursor: default;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    /* Images that are wrapped in a link get the pointer affordance back. */
+    a > img.venue-logo {
+      cursor: pointer;
+    }
+
+    .publication-placeholder {
+      width: 135px;
+      height: 90px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 6px;
+      border-radius: 4px;
+      background: var(--placeholder-bg);
+      color: var(--nav-text);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border: 1px solid var(--placeholder-border);
+      box-sizing: border-box;
+    }
+
+    .publication-content {
+      flex: 1;
+      min-width: 260px;
+      text-align: left;
+    }
+
+    .publication p {
+      margin: 4px 0;
+      line-height: 1.45;
+    }
+
+    .publication p a {
+      font-size: inherit;
+      color: var(--link-blue);
+      margin: 0.25em 0;
+    }
+
+    .publication p a:hover {
+      text-decoration: underline;
+    }
+
+    .publication-icons a {
+      margin-right: 5px;
+    }
+
+    .publication-icons i {
+      font-size: 1.05rem;
+    }
+
+    /* Compact list layout for experience and awards. */
+    .experience-list,
+    .awards-list {
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .experience-entry {
+      margin-bottom: 7px;
+      line-height: 1.45;
+    }
+
+    .experience-entry .detail {
+      display: block;
+      clear: both;
+      color: var(--muted-text);
+    }
+
+    .job-dates {
+      float: right;
+      margin-left: 16px;
+      font-style: italic;
+      color: var(--muted-text);
+    }
+
+    .job-title a {
+      color: var(--link-blue);
+      text-decoration: none;
+    }
+
+    .job-title a:hover {
+      text-decoration: underline;
+    }
+
+    .subheading {
+      margin: 30px 0 8px 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--nav-text);
+    }
+
+    .footnote {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--muted-text);
+    }
+
+    /* Floating back-to-top button. */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      border: none;
+      background: var(--link-blue);
+      color: var(--on-accent);
+      border-radius: 50%;
+      padding: 10px 14px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, background-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--accent-orange);
+      transform: translateY(-1px);
+    }
+
+    /* Dark mode toggle. */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin: 14px 0 0;
+      padding: 8px 14px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--nav-text);
+      background: var(--social-bg);
+      border: 1px solid var(--side-border);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background-color 0.18s ease, color 0.18s ease,
+        border-color 0.18s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--social-hover-bg);
+      color: var(--nav-text-hover);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--link-blue);
+      outline-offset: 2px;
+    }
+
+    .theme-toggle .fa {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    /* Stack to a single column; nav becomes a horizontal wrapped row. */
+    @media (max-width: 1000px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 26px;
+        padding: 24px var(--page-gutter) 50px;
+      }
+
+      .sidebar {
+        position: static;
+        top: auto;
+      }
+
+      .profile {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas:
+          "photo name"
+          "photo social"
+          "photo nav";
+        gap: 0 20px;
+        align-items: center;
+        text-align: left;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .profile .photo-wrap { grid-area: photo; align-self: start; }
+      .profile .name-block { grid-area: name; margin: 0; text-align: left; }
+      .profile .social-links { grid-area: social; justify-content: flex-start; margin: 10px 0 0; }
+      .profile .side-nav { grid-area: nav; margin-top: 12px; }
+
+      .profile-photo {
+        width: 104px;
+        margin: 0;
+      }
+
+      .side-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .side-nav a {
+        padding: 6px 15px;
+        font-size: 0.95rem;
+        border: 1px solid var(--side-border);
+        background: var(--nav-bg);
+      }
+
+      .side-nav a.active {
+        background: var(--link-blue);
+        border-color: var(--link-blue);
+      }
+
+      section {
+        margin: 40px 0;
+      }
+    }
+
+    /* Small screens: keep cards side-by-side, with smaller thumbnails. */
+    @media (max-width: 820px) {
+      .publication {
+        flex-direction: row;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .publication > a:first-child,
+      .publication > div:first-child:not(.publication-content) {
+        flex: 0 0 96px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .publication-content {
+        min-width: 0;
+      }
+
+      .publication img {
+        width: 96px;
+        max-width: 96px;
+        max-height: 90px;
+      }
+
+      .publication img.tile-logo {
+        width: 92px;
+        height: 92px;
+      }
+
+      .publication img.venue-logo {
+        width: 150px;
+        max-width: 150px;
+        max-height: 84px;
+      }
+
+      .publication-placeholder {
+        width: 96px;
+        height: 76px;
+      }
+
+      .job-dates {
+        float: none;
+        display: block;
+        margin-left: 0;
+      }
+    }
+
+    /* Very small screens: stack the identity block fully. */
+    @media (max-width: 560px) {
+      :root {
+        --page-gutter: 16px;
+      }
+
+      .layout {
+        padding: 18px var(--page-gutter) 40px;
+      }
+
+      .profile {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+          "photo"
+          "name"
+          "social"
+          "nav";
+        gap: 12px;
+        text-align: center;
+      }
+
+      .profile .name-block { text-align: center; }
+      .profile .social-links { justify-content: center; }
+      .profile-photo { width: 118px; margin: 0 auto; }
+
+      .name-heading { font-size: 1.55em; }
+
+      .name-bengali { font-size: 1.45em; }
+
+      .side-nav {
+        justify-content: center;
+      }
+
+      .side-nav a {
+        padding: 6px 13px;
+        font-size: 0.88rem;
+      }
+
+      .publication {
+        gap: 10px;
+      }
+
+      .publication > a:first-child,
+      .publication > div:first-child:not(.publication-content) {
+        flex-basis: 82px;
+      }
+
+      .publication img {
+        width: 82px;
+        max-width: 82px;
+        max-height: 78px;
+      }
+
+      .publication img.tile-logo {
+        width: 78px;
+        height: 78px;
+      }
+
+      .publication img.venue-logo {
+        width: 124px;
+        max-width: 124px;
+        max-height: 74px;
+      }
+
+      .publication-placeholder {
+        width: 82px;
+        height: 70px;
+        font-size: 0.72rem;
+      }
+
+      .back-to-top {
+        bottom: 14px;
+        right: 14px;
+        padding: 9px 12px;
+      }
+    }
+
+    /* Phone widths: let the thumbnail become a full-width banner. */
+    @media (max-width: 470px) {
+      .layout {
+        padding: 16px var(--page-gutter) 36px;
+      }
+
+      .publication {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .publication > a:first-child,
+      .publication > div:first-child:not(.publication-content) {
+        flex: 0 0 auto;
+      }
+
+      .publication img:not(.tile-logo),
+      .publication-placeholder {
+        width: 100%;
+        max-width: none;
+        max-height: none;
+        height: auto;
+      }
+
+      /* Logos stay square and centered instead of stretching into a banner. */
+      .publication img.tile-logo {
+        align-self: center;
+        width: 88px;
+        height: 88px;
+      }
+
+      /* Venue logos size themselves to the artwork, centered in the stacked column. */
+      .publication img.venue-logo {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 96px;
+        margin: 0 auto;
+      }
+
+      .publication-placeholder {
+        padding: 16px 12px;
+        font-size: 0.78rem;
+      }
+
+      .publication-content { width: 100%; }
+
+      section { margin: 32px 0; }
+    }
+
+    /* Narrow phones: keep everything comfortable at 320px. */
+    @media (max-width: 380px) {
+      .profile-photo { width: 104px; }
+
+      .name-heading { font-size: 1.42em; }
+      .name-bengali { font-size: 1.35em; }
+
+      .side-nav a {
+        padding: 5px 10px;
+        font-size: 0.84rem;
+      }
+
+      .social-links a { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+
+<!--
+  Choose theme and background here.
+
+  Theme options:
+    - theme-cobalt-sky, theme-soft-green, theme-muted-sage, theme-blue-gray,
+      theme-warm-cream, theme-minimal-gray, theme-slate-teal, theme-lavender,
+      theme-sandstone, theme-forest, theme-michigan-blue
+
+  Background options:
+    - bg-none, bg-doodle-portrait, bg-doodle-landscape
+-->
+<body class="theme-cobalt-sky bg-none">
+
+  <div class="layout">
+
+    <!-- ===================================================
+         LEFT COLUMN — identity block, then vertical nav
+         =================================================== -->
+    <aside class="sidebar">
+
+      <div class="profile">
+        <div class="photo-wrap">
+          <a href="images/me.jpg">
+            <img src="images/me.jpg" alt="Shiladitya De" class="profile-photo">
+          </a>
+        </div>
+
+        <p class="name-block">
+          <span class="name-heading">Shiladitya De</span><br>
+          <span class="name-bengali">শিলাদিত্য দে</span><br>
+        </p>
+
+        <div class="social-links">
+          <a href="data/CV_Shiladitya_De_2026.pdf" class="ai ai-cv ai-3x" aria-label="CV" title="Curriculum Vitae"></a>
+          <a href="https://www.linkedin.com/in/shiladitya-de" class="fa fa-linkedin-square" aria-label="LinkedIn" title="LinkedIn"></a>
+          <a href="mailto:shiladityade.bwn2001@gmail.com" class="fa fa-envelope" aria-label="Email" title="Email"></a>
+        </div>
+
+        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false">
+          <i class="fa fa-moon-o" id="themeToggleIcon" aria-hidden="true"></i>
+          <span id="themeToggleLabel">Dark mode</span>
+        </button>
+
+        <nav class="side-nav" aria-label="Main navigation">
+          <a href="#education">Education</a>
+          <a href="#pubs">Publications</a>
+          <a href="#exp">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#awards">Awards</a>
+          <a href="#courses">Courses</a>
+        </nav>
+      </div>
+
+    </aside>
+
+    <!-- ===================================================
+         RIGHT COLUMN — all content sections
+         =================================================== -->
+    <main>
+
+      <div class="lead-intro">
+        <p>
+          I am currently a software engineer at <a href="https://www.deshaw.com/">D. E. Shaw India</a>, where I develop financial analytics infrastructure and algorithms for derivatives pricing, credit
+          instrument modeling, volatility, and yield computations.
+        </p>
+        <p>
+          I completed an Integrated Bachelor and Masters in Computer Science
+          and Engineering at IIT Kharagpur, where I worked on problems associated with usable security and privacy, advised by <a href="https://cse.iitkgp.ac.in/~mainack/">Mainack Mondal</a>
+        </p>
+        <p>
+          My research interests lie in <strong>usable security and privacy</strong> <sup>_</sup> understanding security
+          and privacy challenges in real-world systems and user-facing technologies. I have worked on problems
+          spanning software security, security issue reporting, and user decision-making in digital payment
+          systems, and I am broadly interested in human-centric security and privacy at the intersection of
+          users, software, and security.
+        </p>
+      </div>
+
+      <!-- ========================= Education ========================= -->
+      <section id="education">
+        <h1>Education</h1>
+
+        <ul class="experience-list">
+          <li class="experience-entry">
+            <span class="job-title"></a> Integrated B.Tech. + M.Tech. (Dual Degree), Computer Science and Engineering <sup>_</sup> <a href="https://iitkgp.ac.in/">IIT Kharagpur</a></span>
+            <span class="job-dates">2020 &ndash; 2025</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title"> Higher Secondary Education <sup>_</sup> <a href="https://iitkharagpur.kvs.ac.in/">Kendriya Vidyalaya IIT Kharagpur</a> </span>
+            <span class="job-dates">2018 &ndash; 2020</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title">Secondary Education <sup>_</sup> <a href="https://iitkharagpur.kvs.ac.in/">Kendriya Vidyalaya IIT Kharagpur</a></span>
+            <span class="job-dates">2013 &ndash; 2018</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ======================== Publications ======================== -->
+      <section id="pubs">
+        <h1>Publications</h1>
+        <article class="publication">
+          <img src="images/asia-ccs-2026-logo.jpeg" alt="ASIA CCS 2026 conference logo" class="venue-logo">
+          <div class="publication-content">
+            <a href="https://doi.org/10.1145/3779208.3785285">
+              <h3>&ldquo;To Pay or Not to Pay?&rdquo;: Understanding User Decision-Making and Influence of Nudges in UPI Apps</h3>
+            </a>
+            <p>
+              Nandini Bajaj<sup>*</sup>, <strong>Shiladitya De</strong><sup>*</sup>, Kshitiz Sharma, Xinru Page,
+              Bart Knijnenburg, Mainack Mondal<br>
+              <em>In <strong>ACM Asia Conference on Computer and Communications Security (ASIA CCS 2026)</strong>.</em>
+              <span class="publication-icons">
+                <a href="https://doi.org/10.1145/3779208.3785285" title="ACM Digital Library"><i class="fa fa-file-pdf-o" title="PDF"></i></a>
+              </span>
+            </p>
+          </div>
+        </article>
+
+        <article class="publication">
+          <img src="images/usenix-sec-2025-logo.png" alt="USENIX Security 2025 conference logo" class="venue-logo">
+          <div class="publication-content">
+            <a href="https://dl.acm.org/doi/10.5555/3766078.3766189">
+              <h3>&ldquo;I wasn&rsquo;t sure if this is indeed a security risk&rdquo;: Data-driven Understanding of Security Issue Reporting in GitHub Repositories of Open Source npm Packages</h3>
+            </a>
+            <p>
+              Rajdeep Ghosh, <strong>Shiladitya De</strong>, Mainack Mondal<br>
+              <em>In <strong>34th USENIX Security Symposium (USENIX Security 2025)</strong>.</em>
+              <span class="publication-icons">
+                <a href="https://dl.acm.org/doi/10.5555/3766078.3766189" title="PDF"><i class="fa fa-file-pdf-o" title="PDF"></i></a>
+              </span>
+            </p>
+          </div>
+        </article>
+        Authors marked with <sup>*</sup> contributed equally.
+      </section>
+
+      <!-- ========================= Experience ========================= -->
+      <section id="exp" class="container">
+        <h1>Experience</h1>
+        <p>
+          Below is a summary of my professional, teaching, and academic service experience.
+        </p>
+
+        <h2 class="subheading">Work Experience</h2>
+        <ul class="experience-list">
+          <li class="experience-entry">
+            <span class="job-title"><a href="https://www.deshaw.com/">D. E. Shaw India Private Limited</a> | Member Technical</span>
+            <span class="job-dates">Jun. 2025 &ndash; Present</span>
+            <span class="detail">
+              Working on financial analytics infrastructure and algorithms for derivatives
+              pricing, credit spreads, realized volatility, and bond yield computation.
+            </span>
+          </li>
+        </ul>
+
+        <h2 class="subheading">Internships</h2>
+        <ul class="experience-list">
+          <li class="experience-entry">
+            <span class="job-title"><a href="https://www.deshaw.com/">D. E. Shaw India Private Limited</a> | Summer Intern, Revamping the Taylor Series Infrastructure</span>
+            <span class="job-dates">May 2024 &ndash; Jul. 2024</span>
+            <span class="detail">
+              Redesigned the Taylor Series framework for real-time analytics, improving performance and scalability for derivatives pricing and risk management.
+            </span>
+          </li>
+        </ul>
+
+        <h2 class="subheading">Teaching</h2>
+        <ul class="experience-list">
+          <li class="experience-entry">
+            <span class="job-title"> Co-designed and served as Teaching Assistant, <a href="https://kronos-192081.github.io/DOCS-2024/">Design Optimization of Computing Systems</a> <sup>_</sup> CSE, IIT Kharagpur</span>
+            <span class="job-dates">Autumn 2024</span>
+          </li>
+          <li class="experience-entry">
+             Teaching Assistant, <a href="https://kronos-192081.github.io/InfoSec-2025/">Information and System Security</a></span><sup>_</sup> CSE, IIT Kharagpur
+            <span class="job-dates">Spring 2025</span>
+          </li>
+        </ul>
+
+        <h2 class="subheading">Academic Service, Talks &amp; Activities</h2>
+        <ul class="experience-list">
+          <li class="experience-entry">
+            <span class="job-title">Presenter, ACM Asia Conference on Computer and Communications Security (ASIA CCS)</span>
+            <span class="job-dates">2026</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title">Attendee, Theory and Practice of Multi-Party Computation (TPMPC), <a href="https://iisc.ac.in/">IISc Bangalore</a></span>
+            <span class="job-dates">2025</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title">Department Representative to the Undergraduate Council, IIT Kharagpur</span>
+            <span class="job-dates">2022 &ndash; 23</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title">Member, Space Technology Student Society &mdash; conducted discussion and star-gazing sessions</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title">Participant, culinary competitions organized by AROMA, IIT Kharagpur</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========================== Projects ========================== -->
+      <section id="projects">
+        <h1>Selected Projects</h1>
+        <article class="publication">
+          <img src="images/project-thesis.svg" alt="Thesis project logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>Alice in Trackerland: Exploring Real-World Utilities of Continuous Location Tracking Apps</h3>
+            <p>
+              <em>Masters Thesis Project, IIT Kharagpur.</em>
+              Guides: <a href="https://cse.iitkgp.ac.in/~mainack/">Mainack Mondal</a> &amp;
+              <a href="https://satcrypt.github.io/">Satrajit Ghosh</a>
+              <span class="job-dates">Aug. 2024 &ndash; Apr. 2025</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="publication">
+          <img src="images/project-advertising.svg" alt="Practical and private advertising project logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>PaPAd: Practical and Private Advertising</h3>
+            <p>
+              <em>Bachelors Thesis Project, IIT Kharagpur.</em>
+              Guides: <a href="https://cse.iitkgp.ac.in/~mainack/">Mainack Mondal</a> &amp;
+              <a href="https://satcrypt.github.io/">Satrajit Ghosh</a>
+              <span class="job-dates">Aug. 2023 &ndash; Apr. 2024</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="publication">
+          <img src="images/project-database.svg" alt="Scalable distributed database project logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>Scalable Distributed Database (<a href="https://github.com/Kronos-192081/DistSys-Spr24">GitHub</a>)</h3>
+            <p>
+              <em>Course Project, Distributed Systems.</em>
+              Instructor: Sandip Chakraborty
+              <span class="job-dates">Feb. 2024 &ndash; Apr. 2024</span>
+            </p>
+            <p>
+              Built a scalable distributed database in Go with range-based sharding, a write-ahead log, and a
+              Dockerized load-balanced server architecture.
+            </p>
+          </div>
+        </article>
+
+        <article class="publication">
+          <img src="images/project-ir.svg" alt="Query-by-example retrieval project logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>Query-by-Example for Scientific Article Retrieval (<a href="https://github.com/outer-rim/Sciatica">GitHub</a>)</h3>
+            <p>
+              <em>Course Project, Information Retrieval.</em>
+              Instructor: Somak Aditya
+              <span class="job-dates">Feb. 2023 &ndash; Apr. 2023</span>
+            </p>
+            <p>
+              Built a Query-by-Example system for faceted scientific article retrieval using an ensemble of six
+              language models, improving NDCG by 7.97%.
+            </p>
+          </div>
+        </article>
+
+        <article class="publication">
+          <img src="images/project-ebpf.svg" alt="eBPF and XDP load balancer project logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>Kernel Level Load Balancer using eBPF and XDP (<a href="https://github.com/Sourabh-S-Das/Advances-in-Operating-Systems/tree/master/Assignment-2">GitHub</a>)</h3>
+            <p>
+              <em>Course Project, Advances in Operating Systems.</em>
+              <span class="job-dates">Oct. 2023 &ndash; Nov. 2023</span>
+            </p>
+            <p>
+              Developed a fast, lightweight load balancer at the kernel level using extended Berkeley Packet
+              Filters (eBPF), leveraging eXpress Data Path (XDP) to intercept and redirect network packets
+              efficiently. Implemented a queue to hold packets when all servers are busy, then redirect them to
+              the server that becomes free.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <!-- =========================== Awards =========================== -->
+      <section id="awards" class="container">
+        <h1>Awards &amp; Achievements</h1>
+        <ul class="awards-list">
+          <li class="experience-entry">
+            <span class="job-title"><b>JEE Advanced</b> 2020 &mdash; All India Rank <b>3402</b> amongst ~150,000 shortlisted candidates</span>
+            <span class="job-dates">2020</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title"><b>JEE Main</b> 2020 &mdash; All India Rank <b>4661</b> amongst ~1,000,000 candidates</span>
+            <span class="job-dates">2020</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title"><b>West Bengal Joint Entrance Examination</b> 2020 &mdash; Rank <b>85</b> amongst ~90,000 candidates</span>
+            <span class="job-dates">2020</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title">Secured <b>department change</b> at the end of first year for being in the top <b>1%</b> students in first year</span>
+            <span class="job-dates">2020-21</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title"><b>Second position</b> in Maths Olympiad General Championship, Technology Students Gymkhana, IIT Kharagpur</span>
+            <span class="job-dates">Jan. 2024</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title">Qualified for the Indian National Astronomy Olympiad (<b>INAO</b>)</span>
+            <span class="job-dates">2019</span>
+          </li>
+          <li class="experience-entry">
+            <span class="job-title">Qualified for Junior Maths Olympiad (<b>JMO</b>) and Regional Mathematics Olympiad (<b>RMO</b>)</span>
+            <span class="job-dates">2016, 2017</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========================== Courses =========================== -->
+      <section id="courses">
+        <h1>Courses Taken</h1>
+        <article class="publication">
+          <img src="images/course-security.svg" alt="Computer Security and Cryptography category logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>Computer Security &amp; Cryptography</h3>
+            <p>
+              Usable Security and Privacy, Information and System Security, Cryptography and Network Security,
+              Foundations of Cryptography, Cryptographic Protocol Theory, Computational Number Theory.
+            </p>
+          </div>
+        </article>
+
+        <article class="publication">
+          <img src="images/course-ml.svg" alt="Machine Learning category logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>Machine Learning</h3>
+            <p>
+              Machine Learning, Natural Language Processing, Linear Algebra for AI and ML,
+              Statistical Foundations of AI and ML, Information Retrieval.
+            </p>
+          </div>
+        </article>
+
+        <article class="publication">
+          <img src="images/course-systems.svg" alt="Computer Science category logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>Computer Science</h3>
+            <p>
+              Switching Circuits &amp; Logic Design<sup>&#9733;</sup>, Compilers<sup>&#9733;</sup>,
+              Systems Programming Laboratory, Computer Networks<sup>&#9733;</sup>,
+              Operating Systems<sup>&#9733;</sup>, Programming &amp; Data Structures<sup>&#9733;</sup>,
+              Computer Organisation &amp; Architecture<sup>&#9733;</sup>,
+              High Performance Computer Architecture, Software Engineering<sup>&#9733;</sup>,
+              Database Management Systems<sup>&#9733;</sup>, Formal Language &amp; Automata Theory,
+              Algorithms I<sup>&#9733;</sup>, Algorithms II, Discrete Structures,
+              Advances in Operating Systems Design, Distributed Systems, Parallel Algorithms,
+              Advanced Graph Theory.
+            </p>
+          </div>
+        </article>
+
+        <article class="publication">
+          <img src="images/course-math.svg" alt="Mathematics category logo" class="tile-logo">
+          <div class="publication-content">
+            <h3>Mathematics</h3>
+            <p>
+              Advanced Calculus, Linear Algebra, Numerical &amp; Complex Analysis,
+              Probability &amp; Statistics.
+            </p>
+          </div>
+        </article>
+
+        <p class="footnote">
+          <sup>&#9733;</sup> marked courses include a laboratory component as well.
+        </p>
+      </section>
+
+    </main>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script>
+    /* =========================================================
+       Active-section navbar highlighting.
+       Scroll-position based, so short sections still highlight reliably.
+       ========================================================= */
+    document.addEventListener("DOMContentLoaded", () => {
+      const navLinks = Array.from(
+        document.querySelectorAll(".side-nav a[href^='#']")
+      );
+
+      const sectionIds = Array.from(
+        new Set(
+          navLinks
+            .map((link) => link.getAttribute("href"))
+            .filter((href) => href && href.startsWith("#") && href.length > 1)
+            .map((href) => href.slice(1))
+        )
+      );
+
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+      function setActiveNav(sectionId) {
+        navLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${sectionId}`);
+        });
+      }
+
+      function currentSectionId() {
+        if (sections.length === 0) return null;
+
+        const probeY = Math.min(window.innerHeight * 0.34, 260);
+        let current = null;
+
+        for (const section of sections) {
+          const rect = section.getBoundingClientRect();
+
+          if (rect.top <= probeY) {
+            current = section.id;
+          }
+        }
+
+        const nearBottom =
+          window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+
+        if (nearBottom) {
+          current = sections[sections.length - 1].id;
+        }
+
+        return current;
+      }
+
+      let ticking = false;
+
+function updateActiveNav() {
+          setActiveNav(currentSectionId());
+          ticking = false;
+        }
+
+      function requestActiveNavUpdate() {
+        if (!ticking) {
+          window.requestAnimationFrame(updateActiveNav);
+          ticking = true;
+        }
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          const target = link.getAttribute("href");
+          if (target && target.startsWith("#")) {
+            setActiveNav(target.slice(1));
+          }
+        });
+      });
+
+      updateActiveNav();
+      window.addEventListener("scroll", requestActiveNavUpdate, { passive: true });
+      window.addEventListener("resize", requestActiveNavUpdate);
+      window.addEventListener("hashchange", requestActiveNavUpdate);
+    });
+
+    /* =========================================================
+       Dark mode toggle. The initial theme is set before paint by the
+       inline script in <head>; this only wires up the button and keeps
+       the control's label in sync with the current state.
+       ========================================================= */
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.getElementById("themeToggle");
+      const icon = document.getElementById("themeToggleIcon");
+      const label = document.getElementById("themeToggleLabel");
+      if (!toggle || !icon || !label) return;
+
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function isDark() {
+        return document.documentElement.getAttribute("data-theme") === "dark";
+      }
+
+      function sync() {
+        const dark = isDark();
+        toggle.setAttribute("aria-pressed", String(dark));
+        label.textContent = dark ? "Light mode" : "Dark mode";
+        icon.className = dark ? "fa fa-sun-o" : "fa fa-moon-o";
+        toggle.setAttribute(
+          "aria-label",
+          dark ? "Switch to light mode" : "Switch to dark mode"
+        );
+      }
+
+      toggle.addEventListener("click", () => {
+        const next = isDark() ? "light" : "dark";
+        if (next === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+        try {
+          localStorage.setItem("theme", next);
+        } catch (err) {
+          /* Persisting is best-effort only. */
+        }
+        sync();
+      });
+
+      /* Follow the OS only while the visitor has not made an explicit choice. */
+      media.addEventListener("change", (event) => {
+        let stored = null;
+        try {
+          stored = localStorage.getItem("theme");
+        } catch (err) {
+          /* ignore */
+        }
+        if (stored) return;
+        if (event.matches) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+        sync();
+      });
+
+      sync();
+    });
+
+    /* Back-to-top button. */
+    document.addEventListener("DOMContentLoaded", () => {
+      const button = document.getElementById("backToTop");
+      if (!button) return;
+
+      button.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      const syncButton = () => {
+        button.classList.toggle("is-visible", window.scrollY > 420);
+      };
+
+      syncButton();
+      window.addEventListener("scroll", syncButton, { passive: true });
+    });
+  </script>
+</body>
+</html>
